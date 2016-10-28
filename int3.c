@@ -451,6 +451,10 @@ Integer Mod_exp(Integer a, Integer b, Integer m) {
 	
 }
 
+Integer totient(Integer p, Integer q) {
+	Integer unity = CreateIntegerFromString("1");
+	return MultiplyIntegers(SubtractIntegers(p, unity), SubtractIntegers(q, unity));
+}
 int IsOdd(Integer a) {
 	if(a.tail == NULL)
 		return 0;
@@ -490,38 +494,3 @@ char * IntegertoString(Integer a) {
 	return str;
 }
 
-int main() {
-	Integer a, b, c, m;
-	char str[10000];
-	scanf("%s", str);
-	a = CreateIntegerFromString(str);
-	//PrintInteger(a);
-	scanf("%s", str);
-	b = CreateIntegerFromString(str);
-	//PrintInteger(b);
-	scanf("%s", str);
-	m = CreateIntegerFromString(str);
-	/*c = AddIntegers(a, b);
-	PrintInteger(c);
-	c = SubtractIntegers(a, b);
-	PrintInteger(c);
-	c = MultiplyIntegers(a, b);
-	PrintInteger(c);
-	c = DivideIntegers(a, b);
-	PrintInteger(c);
-	c = Mod(a, b);*/
-	c = Mod_exp(a, b, m);
-	//PrintInteger(a);
-	//PrintInteger(b);
-	//printf("final ans is ");
-	PrintInteger(c);	
-	/*a = CreateIntegerFromString("87125");
-	b = CreateIntegerFromString("234");
-	PrintInteger(a);
-	PrintInteger(b);
-	c = SubtractIntegers(a, b);
-	PrintInteger(a);
-	PrintInteger(b);
-	PrintInteger(c);*/
-	return 0;
-}

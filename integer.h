@@ -51,4 +51,6 @@ int IsOdd(Integer a);
 
 /* Computes x ^ Y mod m */
 Integer Mod_exp(Integer x, Integer y, Integer m);
+
+Integer totient(Integer p, Integer q);
 #endif
