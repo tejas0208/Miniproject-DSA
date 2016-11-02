@@ -20,6 +20,7 @@
 #include "aes.h"
 #include "data.h"
 
+/* Byte substitution using sbox matrix */
 void subbyte(unsigned char state[4][4]) {
 	int i, j, a, b;
 	for(i = 0; i < 4; i++)
@@ -29,7 +30,8 @@ void subbyte(unsigned char state[4][4]) {
 			state[i][j] = sbox[a][b];
 		}
 }
-			
+
+/* Inverse Byte substitution using invsbox matrix */			
 void invsubbyte(unsigned char state[4][4]) {
 	int i, j, a, b;
 	for(i = 0; i < 4; i++)
@@ -40,6 +42,7 @@ void invsubbyte(unsigned char state[4][4]) {
 		}
 }
 
+/* Inverse shift rows */
 void invshiftr(unsigned char state[4][4]) {
 	unsigned char orig[4][4];
 	int i, j, mag;
@@ -55,6 +58,7 @@ void invshiftr(unsigned char state[4][4]) {
 		}
 }
 
+/* Shift rows */
 void shiftr(unsigned char state[4][4]) {
 	unsigned char orig[4][4];
 	int i, j, mag;
@@ -70,14 +74,17 @@ void shiftr(unsigned char state[4][4]) {
 		}
 }
 
+/* MixColumn */
 void mixcol(unsigned char state[4][4]) {
 	matrixmult(mix, state);
 }
 
+/* Inverse MixColumn */
 void invmixcol(unsigned char state[4][4]) {
 	matrixmult(inv_mix, state);
 }
 
+/* Galois Field multiplication of two elements */
 unsigned char multiply(unsigned char a, unsigned char b) {
 	unsigned char a_coeff[8], result;
 	int i, step[8];
@@ -103,6 +110,7 @@ unsigned char multiply(unsigned char a, unsigned char b) {
 	return result;
 }		
 
+/* Multiply two matrices */
 void matrixmult(unsigned char arr[4][4], unsigned char state[4][4]) {
 	unsigned char temp[4][4], sum;
 	int i, j, k;
@@ -119,6 +127,7 @@ void matrixmult(unsigned char arr[4][4], unsigned char state[4][4]) {
 		}
 }
 
+/* RotWord function for key expansion */
 unsigned char * rotword(unsigned char arr[4]) {
 	int i;
 	unsigned char * result;
@@ -129,6 +138,7 @@ unsigned char * rotword(unsigned char arr[4]) {
 	return result;
 }
 
+/* Subword function for key expansion */
 unsigned char * subword(unsigned char arr[4]) {
 	int i;
 	unsigned char * result;
@@ -138,7 +148,7 @@ unsigned char * subword(unsigned char arr[4]) {
 	return result;
 }
 
-
+/* Read a line from the screen */
 int readline(unsigned char *arr, int len) {
 	int i = 0;
 	unsigned char ch;
@@ -149,6 +159,7 @@ int readline(unsigned char *arr, int len) {
 	return i;
 }
 
+/* Padding for creating size multiple of 16 bytes PKCS#7 */
 void pad(unsigned char block[16], int x) {
 	int i;
 	i = x;
@@ -157,12 +168,14 @@ void pad(unsigned char block[16], int x) {
 		block[i] = x;
 }
 
+/* Remove the padding while decryption */
 int unpad(unsigned char block[16]) {
 	int x;
 	x = block[15];
 	return x;
 }
 
+/* Encrypt the state matrix */
 void aes_encrypt(unsigned char state[4][4], unsigned char **word_matrix, int nr) {
 	int i;
 	addroundkey(state, word_matrix, 0);
@@ -175,6 +188,7 @@ void aes_encrypt(unsigned char state[4][4], unsigned char **word_matrix, int nr)
 	}
 }
 
+/* Adding round key at each round */
 void addroundkey(unsigned char state[4][4], unsigned char **word_matrix, int k) {
 	int i, j;
 	for(i = 0; i < 4; i++) {
@@ -184,7 +198,7 @@ void addroundkey(unsigned char state[4][4], unsigned char **word_matrix, int k) 
 	}
 }
 
-
+/* Key expansion */
 void keyexp(unsigned char *key, unsigned char **word_matrix, int n) {
 	int i, j;
 	unsigned char temp[4], *operate;
@@ -246,6 +260,7 @@ void keyexp(unsigned char *key, unsigned char **word_matrix, int n) {
 	}
 }
 
+/* Decrypt the state matrix */
 void aes_decrypt(unsigned char state[4][4], unsigned char **word_matrix, int nr) {
 	int i;
 	addroundkey(state, word_matrix, 4 * nr);

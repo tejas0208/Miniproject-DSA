@@ -34,6 +34,7 @@ void usage() {
 	printf("Try './project -h' for more information.\n");
 }
 
+/* Help function for usage descriotion */
 void help() {
 	printf("USAGE : ./project [OPTION] <source> <destination> <keyfile> <keysize(aes only)>\n");
 	printf("Encrypts/Decrypts source file using the AES or the RSA algorithm\n");
@@ -235,6 +236,7 @@ int main(int argc, char *argv[]) {
 		return 0;
 	}
 	
+	/* RSA ENCRYPTION */
 	if(r_encflag) {
 		mpz_t p, q, t, e, d, product;
 		Integer p1, q1, n, tot, e1;
@@ -304,6 +306,7 @@ int main(int argc, char *argv[]) {
 	
 	}
 	
+	/* RSA DECRYPTION */
 	if(r_decflag) { 
 		Integer d1, n;
 		char str1[500], str2[500];

@@ -62,14 +62,18 @@ Integer Copy(Integer a);
 /* This function divides two Integers a and b, and returns the remainder as Integer */
 Integer Mod(Integer a, Integer b);
 
+/* Return 1 if zero */
 int IsZero(Integer a);
 
+/* Return 1 if odd */
 int IsOdd(Integer a);
 
 /* Computes x ^ Y mod m */
 Integer Mod_exp(Integer x, Integer y, Integer m);
 
+/* Compute the totient function */
 Integer totient(Integer p, Integer q);
 
+/* Free the memory allocated to an integer */
 void DestroyInteger(Integer a);
 #endif

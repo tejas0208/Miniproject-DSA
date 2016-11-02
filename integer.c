@@ -60,6 +60,7 @@ Integer CreateIntegerFromString(char *str) {
 	return a;
 }
 
+/* Free all memory allocated to an integer */
 void DestroyInteger(Integer a) {
 	node *p;
 	p = a.head;
@@ -315,6 +316,7 @@ void PrintInteger(Integer a) {
 	printf("\n");
 }
 
+/* Multiply an integer by a digit */
 Integer mult_dig(Integer a, unsigned int n) {
 	Integer ans;
 	int max, i, x;
@@ -376,6 +378,7 @@ Integer mult_dig(Integer a, unsigned int n) {
 
 }
 
+/* Multiply 2 integers */
 Integer MultiplyIntegers(Integer a, Integer b) {
 	Integer x, ans;
 	node *p, *temp;
@@ -401,6 +404,7 @@ Integer MultiplyIntegers(Integer a, Integer b) {
 	return ans;
 }
 
+/* Allocate memory for another integer and copy contents */
 Integer Copy(Integer a) {
 	Integer ans;
 	char *str;
@@ -409,6 +413,7 @@ Integer Copy(Integer a) {
 	return ans;
 }
 
+/* Append a character to an integer */
 Integer append(Integer a, char c) {
 	Integer ans;
 	node *temp;
@@ -424,6 +429,7 @@ Integer append(Integer a, char c) {
 	return ans;
 }
 
+/* Divide 2 integers */
 Integer DivideIntegers(Integer a, Integer b) {
 	Integer ans, div, f, tmp;
 	char *str;
@@ -459,6 +465,7 @@ Integer DivideIntegers(Integer a, Integer b) {
 	return ans;
 }
 
+/* Return a mod b */
 Integer Mod(Integer a, Integer b) {
 	Integer q, p, ans;
 	q = DivideIntegers(a, b);
@@ -467,6 +474,7 @@ Integer Mod(Integer a, Integer b) {
 	return ans;
 }
 
+/* Modular exponentiation using gmp library */
 Integer Mod_exp(Integer a, Integer b, Integer m) {
 	Integer ans;
 	mpz_t x, y, mod, rop;
@@ -480,17 +488,20 @@ Integer Mod_exp(Integer a, Integer b, Integer m) {
 	
 }
 
+/* Find the totient function (p - 1)(q - 1); */
 Integer totient(Integer p, Integer q) {
 	Integer unity = CreateIntegerFromString("1");
 	return MultiplyIntegers(SubtractIntegers(p, unity), SubtractIntegers(q, unity));
 }
 
+/* Return 1 if odd */
 int IsOdd(Integer a) {
 	if(a.tail == NULL)
 		return 0;
 	return ((a.tail->digit - '0') % 2);
 }
 
+/* Return 1 if zero */
 int IsZero(Integer a) {
 	node *p = a.head;
 	if(!p) {
@@ -504,6 +515,7 @@ int IsZero(Integer a) {
 	return 1;
 }
 
+/* Create a null terminated string from an integer */
 char * IntegertoString(Integer a) {
 	char *str, *t;
 	str = malloc(a.size + 2); //One extra byte for the minus sign

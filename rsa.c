@@ -41,6 +41,7 @@ void IntGmp(Integer a, mpz_t b) {
 	mpz_set_str(b, str, 10);
 }
 
+/* Generate 2 distinct 512 bit prime nos */
 void GeneratePrimes(mpz_t a, mpz_t b) {
 	unsigned int seed;
 	gmp_randstate_t p, q;
@@ -65,6 +66,7 @@ void GeneratePrimes(mpz_t a, mpz_t b) {
 	}
 }
 
+/* Generate public key for encryption */
 void public_key(mpz_t e, mpz_t tot) {
 	unsigned int seed;
 	gmp_randstate_t p;
@@ -81,10 +83,12 @@ void public_key(mpz_t e, mpz_t tot) {
 	}
 }
 
+/* Generate private key for storing */
 void private_key(mpz_t d, mpz_t e, mpz_t t) {
 	mpz_init(d);
 	mpz_invert(d, e, t);
 }
+
 /* Function for encrypting the file */
 void rsa_encrypt(FILE *fp2, FILE *fp3, Integer e1, Integer n) {
 	char ch;
