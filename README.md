@@ -6,9 +6,9 @@ MIS:111508053
 
 Name:Tejas Uday Nayak
 
-### Features
+## Features
 
-## AES:
+### AES:
 
 Symmetric Key Algorithm
 
@@ -22,7 +22,7 @@ Can encrypt even large files in quick time
 
 Used matrices as the prime data structure for implementation
 
-## RSA:
+### RSA:
 
 1024 bit RSA cryptosystem
 
@@ -33,11 +33,11 @@ Used gmp library for quick modular exponentiation and prime no generation
 Being a slow algorithm RSA is not primarily used for file encryption but for securing symmetric keys
 
 
-###Usage
+## Usage
 
 ```
 $ make
-$ ./final [-d | -e | -h] <source> <destination> <key_file> <key_size>
+$ ./project [-da | -ea | -dr | -er] <source> <destination> <keyfile> <keysize(for aes only)>
 ```
 
 ## Bibliography:
