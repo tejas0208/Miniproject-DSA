@@ -28,7 +28,7 @@ Used matrices as the prime data structure for implementation
 
 Created new data type for multiple precision integers using linked lists
 
-Used gmp library for quick modular exponentiation and prime no generation
+Used gmp library for quick modular exponentiation and prime number generation
 
 Being a slow algorithm RSA is not primarily used for file encryption but for securing symmetric keys
 
